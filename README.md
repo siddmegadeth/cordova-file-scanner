@@ -34,17 +34,51 @@ getFiles(url,fileExtenson,function(resp)
 ```
 
 # Using in Angularjs
+#To use the cordova-file-scanner in a Angularjs App. Kindly download/Add Reference to cordova-file-angular.js from the Git
+Add  a dependecies as follows  CordovaFileReader is the service name. 
+
 
 ```javascript
-getFiles(url,fileExtenson,function(resp)
-{
-	console.log(resp);
-	$rootScope.files = resp;
 
-},function(error)
+var app = angular.module("myApp",["CordovaFileReader"]);
+
+Then in the controller
+
+
+app.controller("globalCtrl",function($scope,$rootScope,cordovaFile)
 {
-	console.log(error);
-});
+	var url    = 
+            [
+              // "cordova.file.dataDirectory",
+              // "cordova.file.documentsDirectory",
+              // "cordova.file.externalApplicationStorageDirectory",
+              // "cordova.file.externalCacheDirectory",
+              // "cordova.file.externalRootDirectory",
+              // "cordova.file.externalDataDirectory",
+              // "cordova.file.sharedDirectory",
+              // "cordova.file.syncedDataDirectory",
+              "file:///storage/emulated/0/",
+              "file:///storage/emulated/0"
+            ];
+
+            	  fileType = "mp3";
+              	  
+	           cordovaFile.scan(url,fileType,function(resp)
+	          {
+	           
+	            $rootScope.currentList = resp.currentList;
+	            $rootScope.globalList = resp.globalList;
+	           
+	          },function(error)
+	          {
+	            log(error);
+	          });	
+	
+
+}
+
+#Provide the URL as an Array,Type of file to be scanned.(Only provide .file Extrnsion) with success,error callbacks.
+
 
 ```
 
