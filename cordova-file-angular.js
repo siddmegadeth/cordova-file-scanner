@@ -11,27 +11,23 @@ file.service("cordovaFile",function()
      
       //Function Definition For fileEntry and Error
       var fileSearch = function (entry) {
-      log("Scanning Files");
-      log(entry);
+   
       
 
       var dirReader = entry.createReader();
       dirReader.readEntries(
           function (entries) {
-             log(entries);
               var i=0;
               while(i!=entries.length) 
               {
 
                   if (entries[i].isDirectory === true) {
                       // Recursive -- call back into this subdirectory
-                      log("Directory Found : ");
-                      log(entries[i]);
+            
                       fileSearch(entries[i]);
                   } else 
                   {
-                      log("File Found : ");
-                      log(entries[i].name);
+        
                     if(entries[i].name.indexOf(fileType) != -1)
                     {
                       
@@ -64,7 +60,6 @@ file.service("cordovaFile",function()
     };   //Func ENds
 
     var fileError = function (error) {
-      log("getDirectory error: " + error.code);
       console.log(error);
       failure(error);
      
@@ -73,7 +68,6 @@ file.service("cordovaFile",function()
      var i=0;
      while(i!=url.length) 
      {
-        log(url[i]);
         if (url[i] === null || url[i].length === 0) 
         {
             continue; // skip blank / non-existent paths for this platform
