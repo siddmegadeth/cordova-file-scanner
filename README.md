@@ -61,13 +61,13 @@ app.controller("globalCtrl",function($scope,$rootScope,cordovaFile)
               "file:///storage/emulated/0"
             ];
 
-            	  fileType = "mp3";
+            	  fileType = ["mp3,"mp4","avi","pdf"];
+		//  Currently File named are Scanned Using the . Extension Only.Please do not use the dot . while providing file ext
               	  
 	           cordovaFile.scan(url,fileType,function(resp)
 	          {
 	           
-	            $rootScope.currentList = resp.currentList;
-	            $rootScope.globalList = resp.globalList;
+			$rootScope.response = resp;
 	           
 	          },function(error)
 	          {
@@ -78,6 +78,7 @@ app.controller("globalCtrl",function($scope,$rootScope,cordovaFile)
 }
 
 #Provide the URL as an Array,Type of file to be scanned.(Only provide .file Extrnsion) with success,error callbacks.
+#Currently multi file extension is only provided for Angular
 
 
 ```
